@@ -14,5 +14,8 @@
   },
   "volta": {
     "node": "20.12.2"
+  },
+  "devDependencies": {
+    "vite-plugin-ejs": "^1.7.0"
   }
 }
