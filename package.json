@@ -8,11 +8,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+  "dependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
   },
   "volta": {
-    "node": "18.15.0"
+    "node": "20.12.2"
   }
 }
