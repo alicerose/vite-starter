@@ -5,9 +5,12 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build --emptyOutDir ",
+		"build": "tsc && vite build --emptyOutDir && html-beautify dist/*.html -r && html-beautify dist/**/*.html -r",
 		"preview": "vite preview",
-		"biome": "biome lint --apply ./ && biome format --write ./"
+		"biome": "biome lint --apply ./ && biome format --write ./",
+		"convert-webp": "sh bin/convert-webp.sh",
+		"deploy:develop": "sh bin/deploy.sh develop",
+		"deploy:production": "sh bin/deploy.sh production"
 	},
 	"dependencies": {
 		"autoprefixer": "^10.4.19",
@@ -18,7 +21,9 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.7.3",
 		"glob": "^10.4.0",
-		"vite-plugin-ejs": "^1.7.0"
+		"js-beautify": "^1.15.1",
+		"vite-plugin-ejs": "^1.7.0",
+		"vite-plugin-html-resolve-alias": "^1.0.3"
 	},
 	"volta": {
 		"node": "20.12.2"

@@ -1,9 +1,10 @@
 import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import * as path from 'node:path';
 import { globSync } from 'glob';
 import autoprefixer from 'autoprefixer';
+import viteHtmlResolveAlias from 'vite-plugin-html-resolve-alias';
 
 const root = resolve(__dirname, 'src');
 
@@ -13,78 +14,88 @@ const htmlFiles = globSync('src/**/*.html').reduce((acc, curr) => {
 	return acc;
 }, {});
 
-export default defineConfig({
-	root: root,
-	publicDir: '../public',
+export default defineConfig(({ mode }) => {
+	const envPrefix = ['VITE_', 'APP_ENV'];
+	const env = loadEnv(mode, '.', envPrefix);
+	console.log(mode, { env });
 
-	css: {
-		postcss: {
-			plugins: [autoprefixer],
+	return {
+		root: root,
+		publicDir: '../public',
+
+		css: {
+			postcss: {
+				plugins: [autoprefixer],
+			},
 		},
-	},
 
-	build: {
-		outDir: '../dist',
-		emptyOutDir: true,
-
-		rollupOptions: {
-			input: htmlFiles,
-            output: {
-				assetFileNames: (assetInfo) => {
-					let extType = assetInfo.name.split('.')[1];
-
-					// WebFont
-					if (/ttf|otf|eot|woff|woff2/i.test(extType)) {
-						extType = 'fonts';
-					}
-
-					// images
-					if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-						extType = 'images';
-					}
-
-					// css
-					if(extType === 'css') {
-						return 'assets/css/[name].[hash].css';
-					}
-
-					return `assets/${extType}/[name][extname]`;
-				},
-				chunkFileNames: 'assets/js/[name].[hash].js',
-				entryFileNames: 'assets/js/[name].[hash].js',
-            }
+		esbuild: {
+			drop: env.APP_ENV === 'production' ? ['console', 'debugger'] : [],
 		},
-	},
 
-	plugins: [
-		ViteEjsPlugin(
-			{
-				config: {
-					root: {
-						path: {
-							src: './',
-							ejs: './ejs',
-						},
+		build: {
+			outDir: '../dist',
+			emptyOutDir: true,
+
+			rollupOptions: {
+				input: htmlFiles,
+				output: {
+					assetFileNames: (assetInfo) => {
+						let extType = assetInfo.name.split('.')[1];
+
+						// WebFont
+						if (/ttf|otf|eot|woff|woff2/i.test(extType)) {
+							extType = 'fonts';
+						}
+
+						// images
+						if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+							extType = 'images';
+						}
+
+						// css
+						if (extType === 'css') {
+							return 'assets/css/[name].[hash].css';
+						}
+
+						return `assets/${extType}/[name][extname]`;
 					},
-					sub: {
-						path: {
-							src: '../',
-							ejs: './ejs',
-						},
-					},
+					chunkFileNames: 'assets/js/[name].[hash].js',
+					entryFileNames: 'assets/js/[name].[hash].js',
 				},
 			},
-			{
-				ejs: {
-					beautify: true,
-				},
-			},
-		),
-	],
-
-	resolve: {
-		alias: {
-			'@/': `${root}/`,
 		},
-	},
+
+		plugins: [
+			ViteEjsPlugin(
+				{
+					config: {
+						example: env.VITE_EXAMPLE_ENV_VAR ?? 'example',
+						path: {
+							root: {
+								src: './',
+								ejs: './ejs',
+							},
+							sub: {
+								src: '../',
+								ejs: './ejs',
+							},
+						},
+					},
+				},
+				{
+					ejs: {
+						beautify: true,
+					},
+				},
+			),
+			viteHtmlResolveAlias(),
+		],
+
+		resolve: {
+			alias: {
+				'@/': `${root}/`,
+			},
+		},
+	};
 });
