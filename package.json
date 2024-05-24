@@ -20,5 +20,10 @@
   "devDependencies": {
     "glob": "^10.4.0",
     "vite-plugin-ejs": "^1.7.0"
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not dead"
+  ]
 }
