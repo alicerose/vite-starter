@@ -29,6 +29,30 @@ export default defineConfig({
 
 		rollupOptions: {
 			input: htmlFiles,
+            output: {
+				assetFileNames: (assetInfo) => {
+					let extType = assetInfo.name.split('.')[1];
+
+					// WebFont
+					if (/ttf|otf|eot|woff|woff2/i.test(extType)) {
+						extType = 'fonts';
+					}
+
+					// images
+					if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+						extType = 'images';
+					}
+
+					// css
+					if(extType === 'css') {
+						return 'assets/css/[name].[hash].css';
+					}
+
+					return `assets/${extType}/[name][extname]`;
+				},
+				chunkFileNames: 'assets/js/[name].[hash].js',
+				entryFileNames: 'assets/js/[name].[hash].js',
+            }
 		},
 	},
 
