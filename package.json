@@ -5,14 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --emptyOutDir ",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+  "dependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
   },
   "volta": {
-    "node": "18.15.0"
+    "node": "20.12.2"
+  },
+  "devDependencies": {
+    "glob": "^10.4.0",
+    "vite-plugin-ejs": "^1.7.0"
   }
 }
