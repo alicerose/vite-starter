@@ -19,6 +19,7 @@ export default defineConfig({
 
     build: {
         outDir: '../dist',
+        emptyOutDir: true,
 
         rollupOptions: {
             input: htmlFiles
@@ -26,12 +27,31 @@ export default defineConfig({
     },
 
     plugins: [
-        ViteEjsPlugin(),
+        ViteEjsPlugin({
+            config: {
+                root: {
+                    path: {
+                        src: './',
+                        ejs: './ejs',
+                    }
+                },
+                sub: {
+                    path: {
+                        src: '../',
+                        ejs: './ejs',
+                    }
+                }
+            }
+        }, {
+            ejs: {
+                beautify: true,
+            }
+        }),
     ],
 
     resolve: {
         alias: {
-            '@/' : path.join(__dirname, 'src')
+            '@/' : `${root}/`
         }
     }
 })
