@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import { ViteEjsPlugin } from "vite-plugin-ejs";
 import * as path from "path";
 import {globSync} from "glob";
+import autoprefixer from "autoprefixer";
 
 const root = resolve(__dirname, 'src')
 
@@ -16,6 +17,12 @@ const htmlFiles = globSync('src/**/*.html')
 export default defineConfig({
     root: root,
     publicDir: '../public',
+
+    css: {
+        postcss: {
+            plugins: [autoprefixer]
+        }
+    },
 
     build: {
         outDir: '../dist',
