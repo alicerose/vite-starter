@@ -1,31 +1,27 @@
 {
-  "name": "vite-starter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build --emptyOutDir ",
-    "preview": "vite preview",
-    "biome": "biome lint --apply src && biome format --write src"
-  },
-  "dependencies": {
-    "autoprefixer": "^10.4.19",
-    "sass": "^1.77.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.7.3",
-    "glob": "^10.4.0",
-    "vite-plugin-ejs": "^1.7.0"
-  },
-  "volta": {
-    "node": "20.12.2"
-  },
-  "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "not dead"
-  ]
+	"name": "vite-starter",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build --emptyOutDir ",
+		"preview": "vite preview",
+		"biome": "biome lint --apply ./ && biome format --write ./"
+	},
+	"dependencies": {
+		"autoprefixer": "^10.4.19",
+		"sass": "^1.77.2",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.10"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.7.3",
+		"glob": "^10.4.0",
+		"vite-plugin-ejs": "^1.7.0"
+	},
+	"volta": {
+		"node": "20.12.2"
+	},
+	"browserslist": ["last 2 version", "> 1%", "not dead"]
 }
