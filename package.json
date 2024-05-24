@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build --emptyOutDir ",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "biome": "biome lint --apply src && biome format --write src"
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
@@ -14,12 +15,13 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.10"
   },
-  "volta": {
-    "node": "20.12.2"
-  },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.3",
     "glob": "^10.4.0",
     "vite-plugin-ejs": "^1.7.0"
+  },
+  "volta": {
+    "node": "20.12.2"
   },
   "browserslist": [
     "last 2 version",
