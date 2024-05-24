@@ -1,3 +1,6 @@
-body {
-  background: #c0c0c0;
-}
+// vendor
+//@use 'vendor/normalize';
+@use 'vendor/remedy';
+
+// foundation
+@use 'foundation/base';
