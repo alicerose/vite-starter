@@ -84,9 +84,11 @@ export default defineConfig(({ mode }) => {
 					},
 				},
 				{
-					ejs: {
+					ejs: (viteConfig) => ({
 						beautify: true,
-					},
+						watchEjsFiles: true,
+						views: [`${root}`],
+					}),
 				},
 			),
 			viteHtmlResolveAlias(),
