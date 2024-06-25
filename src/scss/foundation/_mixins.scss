@@ -73,14 +73,14 @@
 // reset form
 // @include formReset(select)でセレクトボックス用
 @mixin formReset($property: input) {
+  padding: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background: transparent;
   border: none;
   border-radius: 0;
   outline: none;
-  background: transparent;
-  padding: 0;
   @if ($property == select) {
     &::-ms-expand {
       display: none;
@@ -91,8 +91,8 @@
 // objectFit
 // IE11でpolyfill(https://github.com/fregante/object-fit-images) を使うときのことを考えてmixin化
 @mixin objectFit($method: contain) {
+  font-family: 'object-fit: #{$method};';
   object-fit: $method;
   object-position: center;
-  font-family: 'object-fit: #{$method};';
   @content;
 }
