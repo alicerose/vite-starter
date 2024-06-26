@@ -8,9 +8,9 @@
 .pager__wrapper {
   display: flex;
   align-items: center;
-  list-style-type: none;
-  margin: 1em 0;
   padding: 0;
+  margin: 1em 0;
+  list-style-type: none;
 }
 
 .pager__container {
@@ -26,8 +26,8 @@
 
 .pager__link {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   text-decoration: none;

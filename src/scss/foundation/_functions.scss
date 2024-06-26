@@ -2,8 +2,8 @@
 // 独自関数
 // --------------------------------
 @use 'sass:math';
+@use 'sass:list';
 @use 'variables' as var;
-@use '../vendor/mdColors' as md;
 
 // z-index
 // variablesで定義した順にz-indexを付与する
@@ -11,7 +11,7 @@
 //   z-index: z(fuga); // z-index: 1;
 // }
 @function z($name) {
-  @return index(var.$z-indexes, $name);
+  @return list.index(var.$z-indexes, $name);
 }
 
 // line-height
@@ -25,8 +25,8 @@
 }
 
 // vw
-@function vw($value) {
-  @return math.div($value, var.$design * 2) * 100vw;
+@function vw($value, $screen: var.$designPC) {
+  @return math.div($value, $screen * 2) * 100vw;
 }
 
 // minvw
@@ -34,22 +34,4 @@
   $num: math.div(100, $view) * $size * 1vw;
   $dist: min(#{$num}, #{$max + px});
   @return $dist;
-}
-
-// Material Design Colors
-// Material Design準拠のパレットを扱う
-// https://material.io/design/color/the-color-system.html#tools-for-picking-colors
-// $color
-//   カラー名称
-// $index
-//   1〜10がベースカラー
-//   11〜14がAltカラー（存在しない場合あり）
-@function mdColor($color, $index: 10) {
-  $list: map-get(md.$colors, $color);
-  @if $color == Black or $color == White {
-    @return $list;
-  } @else {
-    $key: nth(md.$color-keys, $index);
-    @return map-get($list, $key);
-  }
 }

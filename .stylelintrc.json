@@ -1,0 +1,18 @@
+{
+	"overrides": [
+		{
+			"files": ["**/*.scss"],
+			"customSyntax": "postcss-scss"
+		}
+	],
+	"extends": [
+		"stylelint-config-recommended-scss",
+		"stylelint-config-recess-order"
+	],
+	"ignoreFiles": ["src/scss/vendor/*.scss"],
+	"plugins": ["stylelint-order"],
+	"rules": {
+		"block-no-empty": null,
+		"no-descending-specificity": null
+	}
+}

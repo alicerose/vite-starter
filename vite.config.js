@@ -4,7 +4,6 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import * as path from 'node:path';
 import { globSync } from 'glob';
 import autoprefixer from 'autoprefixer';
-import viteHtmlResolveAlias from 'vite-plugin-html-resolve-alias';
 
 const root = resolve(__dirname, 'src');
 
@@ -84,12 +83,13 @@ export default defineConfig(({ mode }) => {
 					},
 				},
 				{
-					ejs: {
+					ejs: (viteConfig) => ({
 						beautify: true,
-					},
+						watchEjsFiles: true,
+						views: [`${root}`],
+					}),
 				},
 			),
-			viteHtmlResolveAlias(),
 		],
 
 		resolve: {
