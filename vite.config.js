@@ -89,7 +89,7 @@ export default defineConfig(({ mode }) => {
 						views: [`${root}`],
 					}),
 				},
-			)
+			),
 		],
 
 		resolve: {
