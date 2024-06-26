@@ -1,5 +1,42 @@
+<%
+if(typeof title === 'undefined') {
+    title = config.title;
+}
+
+if(typeof description === 'undefined') {
+    description = config.description;
+}
+
+if(typeof path === 'undefined') {
+   path = ''
+}
+
+const TitleTag = (title) => {
+    if(title === config.title) {
+        return title;
+    }
+
+    return title + ' | ' + config.title;
+}
+
+%>
 <meta charset="UTF-8">
 <meta name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="/scss/style.scss">
+<title><%= TitleTag(title) %></title>
+<meta name="description" content="<%= description%>">
+<meta property="og:site_name"  content="<%= config.title %>">
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%= title %>" />
+<meta property="og:description" content="<%= description %>" />
+<meta property="og:url" content="<%= config.url + path %>" />
+<meta property="og:image" content="<%= config.env === 'local' ? 'http://localhost:5173' : config.url %>/assets/images/ogp.png" />
+<link rel="canonical" href='<%= config.url + path %>'>
+<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+<%
+    delete title;
+    delete description;
+    delete path;
+%>
