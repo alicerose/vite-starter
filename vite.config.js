@@ -4,6 +4,7 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import * as path from 'node:path';
 import { globSync } from 'glob';
 import autoprefixer from 'autoprefixer';
+import SiteConfig from './data/default.js';
 
 const root = resolve(__dirname, 'src');
 
@@ -80,6 +81,7 @@ export default defineConfig(({ mode }) => {
 								ejs: './ejs',
 							},
 						},
+						...SiteConfig,
 					},
 				},
 				{
