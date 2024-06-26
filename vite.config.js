@@ -16,7 +16,7 @@ const htmlFiles = globSync('src/**/*.html').reduce((acc, curr) => {
 export default defineConfig(({ mode }) => {
 	const envPrefix = ['VITE_', 'APP_ENV'];
 	const env = loadEnv(mode, '.', envPrefix);
-	console.log(mode, { env });
+	console.log('Environments: ', { mode, env });
 
 	return {
 		root: root,

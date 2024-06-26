@@ -2,13 +2,14 @@
 
 Webpackで作成していた静的ページ開発環境をViteに刷新
 
-## Language / 
+## Language / Frameworks
 
 * ~~Webpack~~ -> Vite
 * HTML(+EJS)
 * SCSS
 * TypeScript
 * ~~ESLint+Prettier~~ -> Biome
+* ~~husky~~ -> lefhook
 
 ## Requirement
 
@@ -40,13 +41,15 @@ brew install webp
 
 | コマンド                | 用途           | 備考                                                        |
 |:--------------------|:-------------|:----------------------------------------------------------|
-| `dev`               | 開発環境起動       |                                                           |
-| `build`             | ビルド実行        |                                                           |
-| `preview`           | プレビュー        |                                                           |
-| `biome`             | Biome実行      | [Biome](https://biomejs.dev/)を使用したコードの静的解析＋整形             |
+| `dev`               | 開発環境起動       | 開発用環境を立ち上げる                                               |
+| `build`             | ビルド実行        | ビルド実行                                                     |
+| `preview`           | プレビュー        | ビルドしたファイルを閲覧する用の環境を立ち上げる                                  |
+| `lint:stylelint`    | StyleLint実行  | [StyleLint](https://stylelint.io/)を使用したコードの静的解析＋整形        |
+| `lint:biome`        | Biome実行      | [Biome](https://biomejs.dev/)を使用したコードの静的解析＋整形             |
 | `convert:webp`      | WebP一括変換     | `src/images`配下の画像を一括変換する                                  |
 | `deploy:develop`    | デプロイ（dev環境）  | `.env.develop`の`APP_URL`と`APP_DEPLOY_TARGET`を使用してrsync    |
 | `deploy:production` | デプロイ（prod環境） | `.env.production`の`APP_URL`と`APP_DEPLOY_TARGET`を使用してrsync |
+| `prepare`           | 初期設定         | `.env.example`を複製して`.env`生成、lefthook install実行            |
 
 ### WebP一括変換
 
@@ -75,6 +78,7 @@ APP_DEPLOY_TARGET=hoge:/var/www/html/{デプロイ先ディレクトリ}
 
 マイナーリリースあたりまでの主要更新項目を記載します。 詳細はGithubのリリース情報を参照してください。
 
-| version | date       | description                                      |
-|:--------|:-----------|:-------------------------------------------------|
-| `1.0.0` | 2024/05/25 | 初版                                               |
+| version | date       | description                       |
+|:--------|:-----------|:----------------------------------|
+| `1.0.0` | 2024/05/25 | 初版                                |
+| `1.1.0` | 2024/06/26 | EJS設定修正、stylelint・lefthook追加、設定修正 |
