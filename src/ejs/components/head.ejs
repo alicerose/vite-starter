@@ -1,42 +1,70 @@
 <%
-if(typeof title === 'undefined') {
-    title = config.title;
-}
+const pageKey = key ?? 'default';
+const currentPage = config.pages[pageKey];
 
-if(typeof description === 'undefined') {
-    description = config.description;
-}
-
-if(typeof path === 'undefined') {
-   path = ''
-}
-
-const TitleTag = (title) => {
-    if(title === config.title) {
-        return title;
+const pageTitle = currentPage.title ?? config.base.title;
+const pageTitleTag = () => {
+    if(pageTitle === config.base.title || pageTitle === '') {
+        return config.base.title;
     }
 
-    return title + ' | ' + config.title;
+    const separater = ' | ';
+
+    return pageTitle + separater + config.base.title;
 }
 
+const pageDescription = currentPage.description ?? config.base.description;
+const pageDescriptionTag = () => {
+    if(pageTitle === config.base.description || pageDescription === '') {
+        return config.base.description;
+    }
+
+    return pageDescription;
+}
+
+const pagePath = () => {
+    console.log(config.base.url);
+    if(typeof currentPage.path === 'undefined' || currentPage.path === '') {
+        return config.base.url;
+    }
+
+    return config.base.url + currentPage.path;
+}
 %>
-<meta charset="UTF-8">
+<% if(config.base.gtm !== '') { %>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','<%= config.base.gtm %>');</script>
+    <!-- End Google Tag Manager -->
+<% } %>
+<meta charset="UTF-8" />
 <meta name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="/scss/style.scss">
-<title><%= TitleTag(title) %></title>
-<meta name="description" content="<%= description%>">
-<meta property="og:site_name"  content="<%= config.title %>">
+      content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<% for(const preConnect of config.base.preConnect) { %>
+<link rel="preconnect dns-prefetch" href="<%= preConnect%> " />
+<% } %>
+<link rel="stylesheet" href="/scss/style.scss" />
+<title><%= pageTitleTag() %></title>
+<meta name="description" content="<%= pageDescriptionTag() %>" />
+<meta property="og:site_name" content="<%= config.base.title %>" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="<%= title %>" />
-<meta property="og:description" content="<%= description %>" />
-<meta property="og:url" content="<%= config.url + path %>" />
+<meta property="og:title" content="<%= pageTitle %>" />
+<meta property="og:description" content="<%= pageDescriptionTag() %>" />
+<meta property="og:url" content="<%= pagePath() %>" />
 <meta property="og:image" content="<%= config.env === 'local' ? 'http://localhost:5173' : config.url %>/assets/images/ogp.png" />
-<link rel="canonical" href='<%= config.url + path %>'>
 <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+<link rel="canonical" href="<%= pagePath() %>" />
+<% if(currentPage.meta) { %>
+    <% for(const meta of currentPage.meta) { %>
+        <%- meta %>
+    <% } %>
+<% } %>
+<script type="module" src="/ts/main.ts" defer></script>
 <%
-    delete title;
-    delete description;
-    delete path;
+    delete key;
 %>

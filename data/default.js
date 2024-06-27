@@ -3,9 +3,10 @@ export default {
 		url: 'https://example.com',
 		title: 'Website title placeholder.',
 		description: 'Website common description placeholder.',
-		gtm: '',
+		gtm: 'GTM-XXXXYYYY',
+		preConnect: ['//www.googletagmanager.com'],
 	},
-	routes: {},
+	routes: ['index', 'sub'],
 	pages: {
 		index: {
 			title: null,
