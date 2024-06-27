@@ -6,7 +6,16 @@ export default {
 		gtm: 'GTM-XXXXYYYY',
 		preConnect: ['//www.googletagmanager.com'],
 	},
-	routes: ['index', 'sub'],
+	navigations: [
+		{
+			key: 'index',
+			label: 'Index',
+		},
+		{
+			key: 'sub',
+			label: 'Sub',
+		},
+	],
 	pages: {
 		index: {
 			title: null,

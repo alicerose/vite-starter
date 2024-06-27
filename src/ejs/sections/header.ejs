@@ -6,4 +6,10 @@
 <% } %>
 <header>
     Header
+
+    <nav>
+        <% for(const entry of config.navigations) { %>
+            <a href="<%= config.pages[entry.key].path %>"><%= entry.label %></a>
+        <% } %>
+    </nav>
 </header>

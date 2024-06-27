@@ -2,16 +2,12 @@
 <html lang="ja" prefix="og: http://ogp.me/ns#">
 <head>
     <% const paths = config.path.sub %>
-    <%- include(paths.ejs + '/components/head.ejs', {
-        title: 'sub',
-        description: 'sub description'
-    }) %>
+    <%- include(paths.ejs + '/components/head.ejs', { key: 'sub' }) %>
 </head>
 <body>
 <%- include(paths.ejs + '/sections/header.ejs') %>
 <main class="main">
-    <a href="/">main</a>
-    <img src="@/images/1.jpg.webp" alt="">
+    <img src="/images/1.jpg.webp" alt="">
 </main>
 <%- include(paths.ejs + '/sections/footer.ejs') %>
 </body>
