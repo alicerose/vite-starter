@@ -1,14 +1,15 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" prefix="og: http://ogp.me/ns#">
 <head>
     <% const paths = config.path.root %>
-    <%- include(paths.ejs + '/components/head.ejs') %>
-    <title><%= config.example %></title>
+    <%- include(paths.ejs + '/components/head.ejs', { key: 'index' }) %>
 </head>
 <body>
-<%- include(paths.ejs + '/components/header.ejs') %>
-<a href="sub/">sub</a>
-<img src="@/images/1.jpg.webp" alt="">
-<%- include(paths.ejs + '/components/footer.ejs') %>
+<%- include(paths.ejs + '/sections/header.ejs') %>
+<main class="main">
+    <img src="/images/1.jpg.webp" alt="">
+    <%- include(paths.ejs + '/components/Image.ejs', { src: '/images/1.jpg' }) %>
+</main>
+<%- include(paths.ejs + '/sections/footer.ejs') %>
 </body>
 </html>
