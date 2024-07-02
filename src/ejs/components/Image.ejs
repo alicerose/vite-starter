@@ -1,0 +1,10 @@
+<%
+const classAttributes = typeof className !== 'undefined' ? className : '';
+const imageSource = typeof src !== 'undefined' ? src : null;
+const imageAlt = typeof alt !== 'undefined' ? alt : '';
+const imageLoading = typeof loading !== 'undefined' ? loading : 'lazy';
+%>
+<picture class="<%= classAttributes %>">
+    <source srcset="<%- imageSource %>.webp" type="image/webp" />
+    <img src="<%- imageSource %>" alt="<%- imageAlt %>" loading="<%= imageLoading %>" />
+</picture>
